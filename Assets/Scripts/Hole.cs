@@ -9,6 +9,11 @@ public class Hole : MonoBehaviour
         if(LevelBtn.currentLevel < LevelsContainer.TotalLevels)
         {
             ResultUI.Instant("win-ui");
+            if (LevelBtn.currentLevel != LevelBtn.OpenedCount)
+            {
+                return;
+            }
+
             LevelBtn.OpenedCount++;
         }
         else

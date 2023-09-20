@@ -6,8 +6,6 @@ public class Line : MonoBehaviour
     private Transform BallRefStartPoint { get; set; }
     private LineRenderer LineRender { get; set; }
 
-    [SerializeField] LayerMask mask;
-
     private void Awake()
     {
         LineRender = GetComponent<LineRenderer>();
@@ -41,24 +39,12 @@ public class Line : MonoBehaviour
 
         if(TouchArea.isPressing)
         {
+            LineRender.positionCount = 2;
             var inputPosition = (Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition);
             direction = ((Vector2)BallRefStartPoint.position - inputPosition).normalized;
 
-            var result = Physics2D.Raycast(BallRefStartPoint.position, direction, Mathf.Infinity, mask);
-            if (result.collider)
-            {
-                LineRender.positionCount = 3;
-
-                LineRender.SetPosition(0, BallRefStartPoint.position);
-                LineRender.SetPosition(1, result.point);
-
-                var reflectionDirection = Vector2.Reflect(direction, result.normal);
-                var reflectionResult = Physics2D.Raycast(result.point + reflectionDirection.normalized, reflectionDirection, Mathf.Infinity, mask);
-                if (reflectionResult.collider)
-                {
-                    LineRender.SetPosition(2, reflectionResult.point);
-                }
-            }
+            LineRender.SetPosition(0, BallRefStartPoint.position);
+            LineRender.SetPosition(1, (Vector2)BallRefStartPoint.position + direction.normalized * 3.0f);
         }
 
         if(!TouchArea.isPressing)

@@ -27,7 +27,7 @@ public class Ball : MonoBehaviour
     private void Update()
     {
         lastVelocity = rb.velocity;
-        if(lastVelocity.magnitude <= 0.1f && !inHole)
+        if(lastVelocity.magnitude <= 1.0f && !inHole)
         {
             OnBallDestroy?.Invoke();
             Destroy(gameObject);
