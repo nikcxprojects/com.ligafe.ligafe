@@ -44,7 +44,7 @@ public class Line : MonoBehaviour
             direction = ((Vector2)BallRefStartPoint.position - inputPosition).normalized;
 
             LineRender.SetPosition(0, BallRefStartPoint.position);
-            LineRender.SetPosition(1, (Vector2)BallRefStartPoint.position + direction.normalized * 3.0f);
+            LineRender.SetPosition(1, (Vector2)BallRefStartPoint.position + direction.normalized * 2.0f);
         }
 
         if(!TouchArea.isPressing)

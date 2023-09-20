@@ -36,7 +36,15 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Source.Play();
+        if (SoundOption.IsSfxInt > 0)
+        {
+            Source.Play();
+        }
+
+        if (VibraOption.IsVibraInt > 0)
+        {
+            Handheld.Vibrate();
+        }
 
         var speed = lastVelocity.magnitude;
         var direction = Vector2.Reflect(lastVelocity.normalized, collision.contacts[0].normal);

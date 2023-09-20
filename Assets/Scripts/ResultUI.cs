@@ -10,6 +10,11 @@ public class ResultUI : MonoBehaviour
     public static void Instant(string result)
     {
         var prefab = Resources.Load<GameObject>(result);
-        Instantiate(prefab);
+
+        var go = Instantiate(prefab);
+        if (SoundOption.IsSfxInt > 0)
+        {
+            go.GetComponent<AudioSource>().Play();
+        }
     }
 }
